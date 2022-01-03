@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Predictive Machine Learning with Spotify Data</title>
+  <meta name="description" content="Predictive Machine Learning with Spotify Data" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Predictive Machine Learning with Spotify Data" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Predictive Machine Learning with Spotify Data" />
+  
+  
+  
+
+<meta name="author" content="Autor: Jonathan Schuster   Kontakt: schuster.jonathan95@gmail.com   Github: https://github.com/schuster-j" />
+
+
+<meta name="date" content="2022-01-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="">Machine Learning with Spotify</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path=""><a href="#vorwort"><i class="fa fa-check"></i>Vorwort</a></li>
+<li class="chapter" data-level="1" data-path=""><a href="#grundlagen"><i class="fa fa-check"></i><b>1</b> Grundlagen</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#testverfahren-kreuzvalidierung"><i class="fa fa-check"></i><b>1.1</b> Testverfahren / Kreuzvalidierung</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#optimierung"><i class="fa fa-check"></i><b>1.2</b> Optimierung</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#evaluierung"><i class="fa fa-check"></i><b>1.3</b> Evaluierung</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path=""><a href="#setup"><i class="fa fa-check"></i><b>2</b> Setup</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path=""><a href="#libraries"><i class="fa fa-check"></i><b>2.1</b> Libraries</a></li>
+<li class="chapter" data-level="2.2" data-path=""><a href="#datenaufbereitung"><i class="fa fa-check"></i><b>2.2</b> Datenaufbereitung</a></li>
+<li class="chapter" data-level="2.3" data-path=""><a href="#finaler-datensatz"><i class="fa fa-check"></i><b>2.3</b> Finaler Datensatz</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path=""><a href="#k-nearest-neighbors"><i class="fa fa-check"></i><b>3</b> k-Nearest Neighbors</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path=""><a href="#hintergrund"><i class="fa fa-check"></i><b>3.1</b> Hintergrund</a></li>
+<li class="chapter" data-level="3.2" data-path=""><a href="#modellerstellung"><i class="fa fa-check"></i><b>3.2</b> Modellerstellung</a></li>
+<li class="chapter" data-level="3.3" data-path=""><a href="#optimierung-1"><i class="fa fa-check"></i><b>3.3</b> Optimierung</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path=""><a href="#decision-trees"><i class="fa fa-check"></i><b>4</b> Decision Trees</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path=""><a href="#hintergrund-1"><i class="fa fa-check"></i><b>4.1</b> Hintergrund</a></li>
+<li class="chapter" data-level="4.2" data-path=""><a href="#modellerstellung-1"><i class="fa fa-check"></i><b>4.2</b> Modellerstellung</a></li>
+<li class="chapter" data-level="4.3" data-path=""><a href="#optimierung-2"><i class="fa fa-check"></i><b>4.3</b> Optimierung</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path=""><a href="#neural-networks"><i class="fa fa-check"></i><b>5</b> Neural Networks</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path=""><a href="#hintergrund-2"><i class="fa fa-check"></i><b>5.1</b> Hintergrund</a></li>
+<li class="chapter" data-level="5.2" data-path=""><a href="#modellerstellung-2"><i class="fa fa-check"></i><b>5.2</b> Modellerstellung</a></li>
+<li class="chapter" data-level="5.3" data-path=""><a href="#optimierung-3"><i class="fa fa-check"></i><b>5.3</b> Optimierung</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path=""><a href="#random-forests-decision-tree-forests"><i class="fa fa-check"></i><b>6</b> Random Forests / Decision Tree Forests</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path=""><a href="#hintergrund-3"><i class="fa fa-check"></i><b>6.1</b> Hintergrund</a></li>
+<li class="chapter" data-level="6.2" data-path=""><a href="#modellerstellung-3"><i class="fa fa-check"></i><b>6.2</b> Modellerstellung</a></li>
+<li class="chapter" data-level="6.3" data-path=""><a href="#optimierung-4"><i class="fa fa-check"></i><b>6.3</b> Optimierung</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path=""><a href="#fazit"><i class="fa fa-check"></i><b>7</b> Fazit</a></li>
+<li class="chapter" data-level="8" data-path=""><a href="#weiterführende-informationen"><i class="fa fa-check"></i><b>8</b> Weiterführende Informationen</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/Schuster-j" target="blank">see you on Github</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Predictive Machine Learning with Spotify Data</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Predictive Machine Learning with Spotify Data</h1>
+<p class="author"><em>Autor: Jonathan Schuster <br> Kontakt: <a href="mailto:schuster.jonathan95@gmail.com" class="email">schuster.jonathan95@gmail.com</a> <br> Github: <a href="https://github.com/schuster-j" class="uri">https://github.com/schuster-j</a></em></p>
+<p class="date"><em>2022-01-03</em></p>
+</div>
+<br>
+<center>
+<img src="header.png" title="fig:" alt="Header" />
+</center>
+<p><br></p>
+<div id="vorwort" class="section level1 unnumbered">
+<h1>Vorwort</h1>
+<p>Über die API von Spotify lassen sich die unterschiedlichsten Daten über Songs, Alben, Playlisten und Künstler abgreifen. Neben typischen Metadaten wie dem Erscheinungsdatum, Künstlernamen oder den Ländern, in denen ein Song verfügbar ist, umfasst dies unter Anderem die Ergebnisse der Audio-Analysen, die Spotify für jeden Song automatisiert anfertigt. Wie gut sich diese Daten dazu eignen, mit gängigen Machine Learning Methoden die persönliche Präferenz eines Songs hervorzusagen, wird in diesem Projekt erprobt.</p>
+<p>Dazu habe ich zunächst einen Datensatz von ~1500 Songs erstellt, von denen ich ~1000 Songs als positiv und 500 Songs als negativ bewertet gekennzeichnet habe. Anhand von einer kleinen Auswahl weit verbreiteter, gängiger Methoden des Machine Learning, werde ich untersuchen, wie gut sich diese Daten klassifizieren lassen.</p>
+<p>Nach einer kurzen Übersicht zu den Grundlagen dieses Projektes, wird die Erstellung des Datensatzes über die Spotify API dargestellt. Die zuvor ausgewählten Machine Learning Methoden werden dann in je einem Kapitel vereinfacht erläutert, erprobt und evaluiert.</p>
+<p>Da es sich bei diesem Projekt lediglich um eine Erprobung und Annäherung zu Methoden des Machine Learning handelt, wurde an vielen Stellen auf ausführlichere Theorie verzichtet.</p>
+
+</div>
+<div id="grundlagen" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Grundlagen</h1>
+<p>Machine Learning (Maschinelles Lernen) findet sich in den unterschiedlichsten Branchen und wissenschaftlichen Disziplinen wieder und beschäftigt sich im Kern damit, Informationen durch Algorithmen in anwendbares Wissen umzuwandeln. Als Teilbereich des Gebietes der Artificial Intelligence (Künstliche Intelligenz) umfasst Machine Learning statistische Techniken, um Rückschlüsse auf spezielle Strukturen und Verbindungen in den vorliegenden Daten zu ziehen und gewonnene Erkenntnisse auf neue oder zukünftige Daten anzuwenden.</p>
+<p>Dabei unterscheidet man zwischen Supervised Learning (überwachtes Lernen) und Unsupervised Learning (unüberwachtes Lernen). Supervised Learning dient dazu, ein Model durch bereits vorliegenden Daten zu generieren, welches anschließend Vorhersagen für neue Daten treffen kann, beispielsweise zur Klassifizierung bestimmter Merkmale. Unsupervised Learning ist hingegen eine Technik, um verborgene Muster oder Gruppen in den vorliegenden Daten zu erkennen.</p>
+<p>In diesem Projekt werden wir Techniken des Supervised Learning anwenden. Wir werden also basierend auf den bereits vorliegenden Daten verschiedene Modelle generieren, um die Klassen zukünftiger Daten hervorzusagen. Um zukünftige Daten zu simulieren, unterteilt man die vorliegenden Daten in einen Trainings- und einen Testdatensatz. Dabei wird der Trainingsdatensatz genutzt, um das Modell anzulernen. Anschließend wird das Modell auf den Testdatensatz angewendet, um die Genauigkeit der Hervorsagen an Fällen zu testen, die das Modell zuvor nicht gesehen hat.</p>
+<div id="testverfahren-kreuzvalidierung" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Testverfahren / Kreuzvalidierung</h2>
+<p>Zur Bestimmung der Qualität eines Modells ist es unerlässlich dieses an unbekannten / zukünftigen Daten zu testen. Teilt man die vorliegenden Daten jedoch nur in jeweils einen einzelnen Trainings- und Testdatensatz, können die statistischen Kennzahlen des Modells unter Umständen zu stark davon beeinflusst werden, in welchen Proportionen die unterschiedlichen Klassen in den beiden Datensätzen vorliegen. Dies ist vor allem bei kleineren Stichproben, bzw. Stichproben, in denen eine bestimmte Klasse nur in geringer Proportion vertreten ist, von Bedeutung.</p>
+<p>Um dieses Problem zu lösen, bieten sich verschiedene Verfahren wie zum Beispiel die Kreuzvalidierung (Cross-Valildation) an, welche wir hier verwenden werden.</p>
+<p>Bei der Kreuzvalidierung, auch genannt k-fold cross-validation / k-fold CV, werden die Daten zunächst zufällig sortiert und dann in gleichgroße Teilmengen, die sogenannten folds, der Anzahl <em>k</em> unterteilt. Anschließend werden <em>k</em> Modelle erstellt, bei denen jeweils eine andere dieser Teilmengen als Testmenge verwendet wird (<a href="http://ai.stanford.edu/~ronnyk/accEst.pdf">Kohavi, 1995</a>). Jedes Modell wird dann anhand der Performance beim Vorhersagen der Testmenge evaluiert und die über alle Testmengen hinweg durchschnittliche Fehler- oder Erfolgsquote errechnet. Folglich werden also <em>k</em>-verschiedene Trainings- und Testdatensätze erstellt.</p>
+<br><br />
+
+<center>
+<img src="CV.png" title="fig:" alt="cv" />
+</center>
+<p><br></p>
+<p>Wir werden mittels Kreuzvalidierung für jede Machine Learning Technik die wir untersuchen, 10 Modelle geniereren, wobei jedes Mal andere Teilmengen unserer vorliegenden Daten für das Training und Testen des Modells genutzt werden. Bei dieser 10-fold CV werden somit für 10 verschiedene Modelle jeweils 90% der Daten für das Training und 10% für das Testing verwendet, wobei es zu 10 verschiedenen Kombinationen aus Trainings- und Testmengen kommt.</p>
+<br>
+<center>
+<em>Für mehr Hintergrundinformationen zur Kreuzvalidierung empfiehlt sich: Kohavi, R. (1995). A Study of Cross-Validation and Bootstrap for Accuracy Estimation and Model Selection. International Joint Conference on Artificial Intelligence. <a href="http://ai.stanford.edu/~ronnyk/accEst.pdf">Link zur PDF</a></em>
+</center>
+</div>
+<div id="optimierung" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Optimierung</h2>
+<p>Im Folgenden werden wir für jede zu untersuchende Technik zunächst ein einfaches Modell durch die <em>train()</em> Funktion aus dem Package <em>caret</em> erstellen. Für diese Techniken gibt es jedoch immer spezifische Parameter, die dazu genutzt werden können, das Modell zu optimieren. <em>caret</em> ermöglicht es uns eine Liste an Parametern, die wir erproben möchten, automatisiert für die Generierung der jeweiligen Modelle anzuwenden, die entsprechende Ergebnisse anzuzeigen und das Modell mit der besten Performance zu identifizieren. Welche Kennzahlen für die Ermittlung des Modells mit der besten Performance verwendet werden, können wir selbst festlegen. Je nach Anwendungsfall bieten sich Kennzahlen wie <em>Accuracy, Kappa, die AUC(Area under the curve der ROC Kurve)</em> oder Weitere an.</p>
+<p>Da es in unserem Fall um die Vorhersage von durch uns positiv oder negativ bewerteten Songs auf Spotify geht und wir uns an dieser Stelle noch nicht im Detail damit auseinander setzen, in welchem Verhältnis wir bei der korrekten Vorhersage von positiven Fällen die falsche Vorhersage negativer Fälle in Kauf nehmen möchten, werden wir die AUC (Area under the curve), also die Fläche unter der Receiver Operating Characteristic (ROC) Kurve als Kennzahl für die Ermittlung der Performance der Modelle verwenden.</p>
+<p>Die Receiver Operating Characteristic (ROC) Curve wird dazu genutzt den Kompromiss zwischen dem Entdecken von true positives (korrekt hervorgesagte positive Fälle) und dem Vermeiden von false positives (falsch hervorgesagte negative Fälle) zu prüfen <a href="https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-12-77.pdf">(Robin et al., 2011)</a>. Dabei wird der Anteil der true positives auf einer vertikalen und der Anteil der false positives auf einer horizontalen Achse dargestellt. Eine Diagonale würde dabei ein Modell repräsentieren, das keinen hervorsagenden Wert besitzt und true positives sowie false positives mit der exakt gleichen Rate hervorsagt. Die ROC Kurve eines perfekten Modells würde hingegen durch den Punkt von 100% true positive rate und 0% false positive rate laufen.</p>
+<br>
+<center>
+<img src="ROC-Kurve.png" title="fig:" alt="ROC Beispiel" />
+</center>
+<p><br></p>
+<p>Je näher die ROC Kurve der Kurve eines perfekten Modells ist, umso besser ist die Hervorsage positiver Fälle. Um dies zu messen, wird die Fläche unterhalb der ROC Kurve, die sogenannte area under the ROC curve (AUC) berechnet.</p>
+<br>
+<center>
+<em>Für mehr Hintergrundinformationen zu ROC Kurven empfiehlt sich: Robin, X., Turck, N., Hainard, A., Tiberti, N., Lisacek, F., Sanchez, J. C. &amp; Müller, M. (2011). pROC: an open-source package for R and S+ to analyze and compare ROC curves. BMC Bioinformatics, 12(1). <a href="https://doi.org/10.1186/1471-2105-12-77" class="uri">https://doi.org/10.1186/1471-2105-12-77</a></em>
+</center>
+</div>
+<div id="evaluierung" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Evaluierung</h2>
+<p>Bei der Ermittlung der besten Modellperformance berechnet <em>caret</em> die von uns gewählten Kennzahlen (AUC) entsprechend unseres Testverfahrens, der Kreuzvalidierung, für jede Teilmenge separat und bildet dann einen Durchschnittswert. Um verschiedene Machine Learning Techniken zu vergleichen und ihre Performance zu evaluieren, werden wir die jeweiligen ROC Kurven und den entsprechenden AUC Wert vergleichen.</p>
+<p>Bei der Erstellung der ROC Kurven werden wir die Hervorsagen des von <em>caret</em> in der Optimierung gewählten Modells für den gesamten Datensatz verwenden, um die ROC Kurven nicht einfach nur an einer von uns zufällig gewählten Teilmenge aus der Kreuzvalidierung zu erstellen. Daher können die Werte der AUC bei den von uns mit dem <em>pROC</em> Package erstellten ROC Kurven von den AUC Werten aus der Kreuzvalidierung von <em>caret</em> leicht abweichen.</p>
+
+</div>
+</div>
+<div id="setup" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Setup</h1>
+<div id="libraries" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Libraries</h2>
+<p>Die folgenden Libraries werden für dieses Projekt benötigt:</p>
+<ul>
+<li>spotifyr: Um die Songdaten mit Hilfe der Spotify API zu laden.<br />
+</li>
+<li>caret: Zur Anwendung verschiedener Machine Learning Techniken, Testverfahren und automatisierten Optimierung.<br />
+</li>
+<li>pROC: Zur Erstellung von ROC Kurven und AUC Werten beim direkten Vergleich der verschiedenen Techniken.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spotifyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">300</span>)</span></code></pre></div>
+</div>
+<div id="datenaufbereitung" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Datenaufbereitung</h2>
+<p>Die Daten der Spotify Audio-Analysen können über die Spotify API abgefragt werden. Ein ausführliches Tutorial zur Benutzung der API ist <a href="https://schuster-j.github.io/spotify-api-tutorial/">hier</a>
+zu finden. Der vollständig bereinigte Datensatz liegt im Github Ordner und kann für die weiteren Kapitel direkt geladen werden. Zur Vollständigkeit zeigen die folgenden Schritte, wie der Datensatz erstellt worden ist:</p>
+<p>Zunächst muss die Verbindung mit der API hergestellt und authorisiert werden.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">SPOTIFY_CLIENT_ID =</span> <span class="st">&#39;bbbbe9fbaad141edbae7aa9282ed58d1&#39;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">SPOTIFY_CLIENT_SECRET =</span> <span class="st">&#39;37ee2ca4b26a4eafbae1d69fb08e3a3f&#39;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">get_spotify_authorization_code</span>()</span></code></pre></div>
+<p>Über die Funktion <em>get_playlist_audio_features()</em> lassen sich mit den URIs der jeweiligen Playlisten und dem Benutzernamen von dem Nutzer, der diese erstellt hat, abfragen. Für dieses Projekt habe ich eine Playlist mit Songs, die ich positiv bewerte und eine mit Songs die ich negativ bewerte zusammengestellt. Die Playlist mit den von mir positiv bewerteten Songs umfasst 1016 Fälle, die der negativen 500. Für beides können wir nun die API nutzen und erhalten die Audio Features für alle Songs, die sich in den Listen befinden.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>playlist_username <span class="ot">&lt;-</span> <span class="st">&quot;Hiskee&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>positive_playlist_uri <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;7kPz6tw4OBCEQBVeZvVHMt&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>negative_playlist_uri <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;0lMz3SaO7PDOmeAAUW7iZ4&quot;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>positive_api_data <span class="ot">&lt;-</span> <span class="fu">get_playlist_audio_features</span>(playlist_username, positive_playlist_uri)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>negative_api_data <span class="ot">&lt;-</span> <span class="fu">get_playlist_audio_features</span>(playlist_username, negative_playlist_uri)</span></code></pre></div>
+<p>Um die Songs der jeweiligen Präferenz zuordnen zu können, erstellen wir eine neue Spalte, fassen die beiden Datensätze zusammen und konvertieren die neue Spalte zum Faktor.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>positive_api_data<span class="sc">$</span>preference <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>negative_api_data<span class="sc">$</span>preference <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>api_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(positive_api_data, negative_api_data)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>api_data<span class="sc">$</span>preference <span class="ot">&lt;-</span> <span class="fu">factor</span>(api_data<span class="sc">$</span>preference, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;negative&quot;</span>, <span class="st">&quot;positive&quot;</span>))</span></code></pre></div>
+<p>Anschließend wählen wir die Variablen aus dem Datensatz, die wir im weiteren Prozess und in unseren Machine Learning Modellen verwenden wollen. Neben der Variable <em>preference</em>, die uns die Zuordnung zu den Klassen <em>positiv</em> und <em>negativ</em> ermöglicht, wählen wir die folgenden Variablen, die wir später als Prädiktoren verwenden werden:</p>
+<ul>
+<li><em>danceability</em> - Tanzbarkeit auf einer Skala von 0 bis 1<br />
+</li>
+<li><em>energy</em> - Energie auf einer Skala von 0 bis 1<br />
+</li>
+<li><em>loudness</em> - Lautheit in Dezibel (typischerweise zwischen -60 und 0 dB)</li>
+<li><em>speechiness</em> - Indikator ob sich im Song gesprochene Worte befinden auf einer Skala von 0 bis 1<br />
+</li>
+<li><em>acousticness</em> - Akustik auf einer Skala von 0 bis 1<br />
+</li>
+<li><em>instrumentalness</em> - auf einer Skala von 0 bis 1 - wobei Songs mit Werten über 0.5 als Songs ohne Gesang/Rap vermutet werden</li>
+<li><em>liveness</em> - auf einer Skala von 0 bis 1 - wobei ein höherer Wert für eine höhere Wahrscheinlichkeit steht, dass der Song live gespielt wurde<br />
+</li>
+<li><em>valence</em> - Valenz auf einer Skala von 0 bis 1 - wobei ein höherer Wert für einen positiveren Klang steht<br />
+</li>
+<li><em>tempo</em> - in Beats per Minute (BPM)</li>
+</ul>
+<p>Eine genauerere Beschreibung der Variablen ist in der Dokumentation der Spotify API zu finden: <a href="https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features">Spotify API Dokumentation - Audio Features</a></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>selected_data <span class="ot">&lt;-</span> api_data[<span class="fu">c</span>(<span class="st">&quot;danceability&quot;</span>,<span class="st">&quot;energy&quot;</span>,<span class="st">&quot;loudness&quot;</span>,<span class="st">&quot;speechiness&quot;</span>,<span class="st">&quot;acousticness&quot;</span>,<span class="st">&quot;instrumentalness&quot;</span>,<span class="st">&quot;liveness&quot;</span>,<span class="st">&quot;valence&quot;</span>,<span class="st">&quot;tempo&quot;</span>,<span class="st">&quot;preference&quot;</span>)]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(selected_data)</span></code></pre></div>
+<p>Zuletzt sortieren wir den Datensatz zufällig und exportieren den finalen Datensatz.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>random_row_ids <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(selected_data))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>selected_data_shuffled <span class="ot">&lt;-</span> selected_data[random_row_ids, ]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(selected_data_shuffled)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(selected_data_shuffled, <span class="at">file =</span> <span class="st">&quot;spotify-df.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div id="finaler-datensatz" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Finaler Datensatz</h2>
+<p>Der vollständig bereinigte Datensatz liegt im Github Ordner und kann direkt geladen werden:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>spotify_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;spotify-df.csv&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+
+</div>
+</div>
+<div id="k-nearest-neighbors" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> k-Nearest Neighbors</h1>
+<div id="hintergrund" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Hintergrund</h2>
+<p>Ein erstes Machine Learning Modell werden wir mit der k-Nearest Neighbors (kNN) Methode erstellen. Das kNN Klassifikationsverfahren versucht die Fälle den jeweiligen Klassen zuzuordnen, indem es Fälle mit ähnlichen Merkmalen gruppiert. Dafür setzt es die Werte der verschiedenen Merkmale, also der Prädiktorvariablen, als Koordinaten in einen multidiimensionalen Raum. Liegen die Werte von verschiedenen Fällen bei bestimmten Merkmalen sehr nah beieinander, berücksichtigt der kNN Algorithmus diese Information bei der Zurodnung der Fälle in die Zielklassen. Liegt ein Wert eines Falles nun beispielsweise zwischen mehreren Gruppen, werden die Gruppenzugehörigkeiten seiner k nächsten Nachbarn (z.B. k = 3) verglichen und der Fall der Gruppe zugeteilt, die bei seinen Nachbarn am häufigsten vertreten ist.</p>
+<br>
+<center>
+<img src="kNN-Graph.png" title="fig:" alt="kNN Theoriemodell" />
+</center>
+<p><br></p>
+<p>Über die Funktion <em>modelLookup()</em> aus dem <em>caret</em> Package erhalten wir eine Übersicht dazu, welche Parameter beim kNN Algorithmus optimiert werden können und ob sich das Modell für einen Klassifizierungsalgorithmus (<em>forClass</em>) eignet. Der Parameter <em>k</em> steht dabei für die Anzahl der benachbarten Werte, die berücksichtigt werden sollen.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelLookup</span>(<span class="st">&quot;knn&quot;</span>)</span></code></pre></div>
+<pre><code>##   model parameter      label forReg forClass probModel
+## 1   knn         k #Neighbors   TRUE     TRUE      TRUE</code></pre>
+</div>
+<div id="modellerstellung" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Modellerstellung</h2>
+<p>Um einen ersten Eindruck zu bekommen, können wir die <em>train()</em> Funktion aus dem <em>caret</em> Package verwenden und ein kNN-Modell erstellen. <em>caret</em> übernimmt dabei alle für den kNN Algorithmus notwendigen Vorbereitungsschritte, wie die Normalisierung der Prädiktorvariablen.</p>
+<p>Über die Funktion <em>trainControl()</em> können wir zuvor festlegen, welches Testverfahren angewendet werden soll. In unserem Fall ist dies eine Kreuzvalidierung <strong>(“cv”)</strong> mit <strong>number = 10 </strong> folds. Durch <strong>selectionFunction = “best” </strong> können wir festlegen, dass von allen Modellen, die berechnet werden, am Ende das Modell mit dem besten Ergebnis in der von uns für die Performance Evaluierung festgelegten Kennzahl ( <strong>metric = “ROC” </strong>) ausgewählt und auf den gesamten Datensatz angewendet wird.</p>
+<p>Die Einstellungen <strong>classProbs = TRUE</strong>, <strong>summaryFunction = twoClassSummary </strong> und <strong>savePredictions = TRUE</strong> sind erforderlich, um die Vorhersagen und Wahrscheinlichkeiten, die das Modell für unsere Daten treffen wird zu speichern und später eine ROC Kurve erstellen zu können.</p>
+<p>Innerhalb unserer <em>train()</em> Funktion wählen wir nun also die Variable <em>preference</em>, die wir hervorsagen wollen aus und wählen über <strong>~.</strong> alle anderen Variablen unseres Datensatzes als Prädiktorvariablen. Anschließend müssen wir nurnoch die Methode <strong>“knn”</strong> und die Kennzahl zur Performance Messung <strong>“ROC”</strong> festlegen sowie unsere Kontrollfunktion über <strong>trControl = ctrl</strong>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">selectionFunction =</span> <span class="st">&quot;best&quot;</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">classProbs =</span> <span class="cn">TRUE</span>, <span class="at">summaryFunction =</span> twoClassSummary, <span class="at">savePredictions =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>m_knn <span class="ot">&lt;-</span> <span class="fu">train</span>(preference <span class="sc">~</span> ., <span class="at">data =</span> spotify_df, <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>, <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">trControl =</span> ctrl)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>m_knn</span></code></pre></div>
+<pre><code>## k-Nearest Neighbors 
+## 
+## 1537 samples
+##    9 predictor
+##    2 classes: &#39;negative&#39;, &#39;positive&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 1383, 1383, 1384, 1383, 1384, 1383, ... 
+## Resampling results across tuning parameters:
+## 
+##   k  ROC        Sens   Spec     
+##   5  0.6732464  0.406  0.8061800
+##   7  0.6766231  0.384  0.8206591
+##   9  0.6741126  0.342  0.8370426
+## 
+## ROC was used to select the optimal model using the largest value.
+## The final value used for the model was k = 7.</code></pre>
+<p>Die resultierende Ausgabe zeigt uns die wesentlichen Informationen über den Prozess der Modellgenerierung und das Ergebnis. Wir sehen, dass <em>caret</em> jeweils für <em>k = 5</em>, <em>k = 7</em> und <em>k = 9</em> mittels Kreuzvalidierung Modelle generiert und getestet hat. Der AUC Wert wird im Output in der Spalte ROC angezeigt. Hier stellen wir jedoch fest, dass auch das beste von caret ausgewählte Modell mit <em>k = 7</em> einen AUC Wert hat, der nur als sehr schwach beschrieben werden kann.</p>
+</div>
+<div id="optimierung-1" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Optimierung</h2>
+<p>Um zu testen, ob sich der kNN Algorithmus für unser Projekt noch verbessern lassen kann, können wir unsere <em>train()</em> Funktion optimimeren und <em>caret</em> automatisch verschiedene Parameter für die Modellgenerierung ausprobieren lassen. Wie wir in der <em>modelLookup() </em>Funktion sehen können, bietet sich dafür der Paramter <em>k</em> an.</p>
+<p>Anstatt alle Werte für den Parameter, den wir testen möchten, einzeln einzutragen, können wir die Funktion <em>expand.grid()</em> benutzen und festlegen, dass wir für den Parameter <em>k</em> alle Werte zwischen 1 und 40 in einer Schrittweite von 1 benutzen wollen. Anschließend müssen wir unser erstelltes grid/Raster in unsere <em>train()</em> Funktion durch <strong>tuneGrid = grid</strong> übernehmen.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">selectionFunction =</span> <span class="st">&quot;best&quot;</span>,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">classProbs =</span> <span class="cn">TRUE</span>, <span class="at">summaryFunction =</span> twoClassSummary, <span class="at">savePredictions =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span>  <span class="fu">expand.grid</span>(<span class="at">k =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">40</span>, <span class="at">by =</span> <span class="dv">1</span>))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>m_knn_optimized <span class="ot">&lt;-</span> <span class="fu">train</span>(preference <span class="sc">~</span> ., <span class="at">data =</span> spotify_df, <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">trControl =</span> ctrl,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">tuneGrid =</span> grid)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>m_knn_optimized</span></code></pre></div>
+<pre><code>## k-Nearest Neighbors 
+## 
+## 1537 samples
+##    9 predictor
+##    2 classes: &#39;negative&#39;, &#39;positive&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 1384, 1383, 1383, 1383, 1383, 1383, ... 
+## Resampling results across tuning parameters:
+## 
+##   k   ROC        Sens   Spec     
+##    1  0.6194733  0.486  0.7521004
+##    2  0.6476244  0.498  0.7444175
+##    3  0.6577341  0.440  0.7859317
+##    4  0.6671509  0.446  0.7801344
+##    5  0.6722166  0.410  0.8109317
+##    6  0.6757411  0.420  0.8081031
+##    7  0.6827628  0.394  0.8215926
+##    8  0.6850522  0.364  0.8177278
+##    9  0.6789833  0.344  0.8254854
+##   10  0.6793460  0.350  0.8312080
+##   11  0.6805991  0.330  0.8351008
+##   12  0.6831027  0.344  0.8427838
+##   13  0.6823790  0.322  0.8476102
+##   14  0.6794177  0.312  0.8476008
+##   15  0.6834736  0.324  0.8533887
+##   16  0.6829403  0.302  0.8572535
+##   17  0.6834584  0.304  0.8582058
+##   18  0.6872960  0.322  0.8592233
+##   19  0.6878095  0.322  0.8726848
+##   20  0.6888763  0.322  0.8707991
+##   21  0.6915940  0.306  0.8823562
+##   22  0.6942328  0.312  0.8852595
+##   23  0.6949776  0.306  0.8871826
+##   24  0.6953622  0.312  0.8794716
+##   25  0.6952087  0.306  0.8919810
+##   26  0.6955077  0.290  0.8900485
+##   27  0.6956105  0.294  0.8939040
+##   28  0.6966843  0.302  0.8871453
+##   29  0.6969188  0.308  0.8929238
+##   30  0.6972562  0.314  0.8967793
+##   31  0.7009207  0.310  0.8977409
+##   32  0.7030241  0.310  0.8987304
+##   33  0.6998659  0.290  0.8938854
+##   34  0.6994462  0.278  0.8939227
+##   35  0.6972608  0.274  0.8910194
+##   36  0.6983041  0.266  0.8929425
+##   37  0.6945213  0.264  0.8948656
+##   38  0.6938328  0.252  0.8958271
+##   39  0.6951590  0.254  0.8948562
+##   40  0.6948918  0.262  0.8929425
+## 
+## ROC was used to select the optimal model using the largest value.
+## The final value used for the model was k = 32.</code></pre>
+<p>Unsere Optimierung konnte das Ergebnis leicht verbessern. Das Ergebnis unseres besten Modells können wir wie folgt als ROC Kurve darstellen. Dazu benötigen wir lediglich die tatsächlichen Klassen unseres Datensatzes, die wir über unser <em>caret</em> Modell abgreifen können sowie die vom Modell hervorgesagten Wahrscheinlichkeiten dafür, dass ein Fall positiv ist.</p>
+<p>Da sich der AUC Wert in der Ausgabe unseres Modells aus dem Durchschnittswert der AUC Werte unserer 10 Modelle der Kreuzvalidierung ergibt und wir nun eine ROC Kurve für den gesamten Datensatz anfertigen, können die AUC Werte leicht von den Werten aus der Ausgabe von <em>caret</em> abweichen.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">pty =</span> <span class="st">&quot;s&quot;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>roc_knn <span class="ot">&lt;-</span> <span class="fu">roc</span>(m_knn_optimized<span class="sc">$</span>pred<span class="sc">$</span>obs, m_knn_optimized<span class="sc">$</span>pred<span class="sc">$</span>positive, <span class="at">plot=</span><span class="cn">TRUE</span>, <span class="at">legacy.axes=</span><span class="cn">TRUE</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">percent=</span><span class="cn">TRUE</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">xlab=</span><span class="st">&quot;False Positive Percentage&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;True Positive Percentage&quot;</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">col=</span><span class="st">&quot;aquamarine3&quot;</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">print.auc=</span><span class="cn">TRUE</span>, <span class="at">print.auc.y=</span><span class="dv">10</span>, <span class="at">print.auc.x=</span><span class="dv">30</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">main=</span><span class="st">&quot;ROC-Kurve für kNN Modell&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>roc_knn</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">100</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;kNN&quot;</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;aquamarine3&quot;</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">xpd=</span><span class="cn">TRUE</span>, <span class="at">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<br>
+Aus unserem roc_knn Objekt können wir den AUC Wert auch direkt abfragen. Trotz Optimierung ist das Ergebnis eher als schwach einzuordnen.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>roc_knn<span class="sc">$</span>auc</span></code></pre></div>
+<pre><code>## Area under the curve: 68.17%</code></pre>
+
+</div>
+</div>
+<div id="decision-trees" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Decision Trees</h1>
+<div id="hintergrund-1" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Hintergrund</h2>
+<p>Decision Tree Learners sind Klassifizierungsmodelle, bei denen Beziehungen zwischen Merkmalen und ihre potenziell aus diesen resultierenden Klassen in einer hierarchischen, baumartigen Struktur abgebildet werden. Ausgehend von einem Wurzelknoten (root node), der die Daten in verschiedene Ausprägungen eines Merkmals unterteilt, werden die Daten entlang der Äste an weiteren Knotenpunkten immer weiter geteilt, bis sie sich an den Enden, den Blattknoten (leaf nodes), zu der jeweiligen Klasse zusammenfassen lassen.</p>
+<p>Ein Decision Tree wird mit Hilfe der statistischen Methode “Recursive Partitioning” (auch “divide and conquer” genannt) erstellt, bei der die vorliegenden Daten in verschiedene Teilmengen geteilt werden, bevor diese Teilmengen ebenfalls weiter in noch kleinere Teilmengen geteilt werden, um eine Zuordnung zu ermöglichen.</p>
+<br>
+<center>
+<img src="recursivepartitioning.png" title="fig:" alt="Recursive Partitioning Beispiel" />
+</center>
+<p><br></p>
+<p>Stellt man die immer weiter aufgeteilten Daten in einem Baumdiagramm dar und betrachtet die Anzahl der jeweiligen Fälle an den einzelnen Knoten, lassen sich Wahrscheinlichkeiten für ihre Klassenzugehörigkeit berechnen und später auf neue Fälle mit übereinstimmenden Merkmalen anwenden.</p>
+<br>
+<center>
+<img src="DecisionTrees.png" title="fig:" alt="Decision Tree Beispiel" />
+</center>
+<p><br></p>
+<p>In der Praxis werden die Decision Trees schnell deutlich komplexer. So können bestimmte Merkmale, bzw. Variablen, auch an mehreren Stellen mit unterschiedlichen Ausprägungen vorkommen, z.B. mit einer anderen Schwelle für die Einordnung von Hoch/Tief.</p>
+<p>Einer der zahlreichen in R anwendbaren Decision Tree Algorithmen ist der C5.0 Algorithmus, den wir wie bei den vorherigen Methoden über <em>caret</em> anwenden können. Wie im modelLookup zu sehen, bestehen hier deutlich mehr Parameter, um das Modell eventuell zu optimieren.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelLookup</span>(<span class="st">&quot;C5.0&quot;</span>)</span></code></pre></div>
+<pre><code>##   model parameter                 label forReg forClass probModel
+## 1  C5.0    trials # Boosting Iterations  FALSE     TRUE      TRUE
+## 2  C5.0     model            Model Type  FALSE     TRUE      TRUE
+## 3  C5.0    winnow                Winnow  FALSE     TRUE      TRUE</code></pre>
+<br>
+<center>
+<p><em>Für mehr Hintergrundinformationen zu Decision Trees empfiehlt sich die folgende Literatur:</em><br />
+<em>Breiman, L., Friedman, J. H., Olshen, R. A. &amp; Stone, C. J. (1984). Classification and Regression Trees. Chapman &amp; Hall.</em></p>
+<em>Jena, M. &amp; Dehuri, S. (2020). DecisionTree for Classiﬁcation and Regression: A State-of-the Art Review. Informatica, 44(4). <a href="https://doi.org/10.31449/inf.v44i4.3023" class="uri">https://doi.org/10.31449/inf.v44i4.3023</a></em>
+</center>
+</div>
+<div id="modellerstellung-1" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Modellerstellung</h2>
+<p>Wir erstellen erneut ein erstes Modell über die <em>train()</em> Funktion und berücksichtigen dabei unser <em>ctrl</em> Objekt, um die 10-fold Kreuzvalidierung anzuwenden. Da die C5.0 Methode in <em>caret</em> es uns ermöglicht, mit dem Parameter <strong>model</strong> zwischen verschiedenen Modelltypen zu wählen und so nicht nur Decision Trees, sondern auch sogenannte Rule Learning Algorithmen erstellen zu können, verwenden wir schon für unser erstes Modell ein tuneGrid mit den notwendigen Parametern <strong>trials</strong>, <strong>model</strong> und <strong>winnow</strong>. Der Parameter <strong>trials</strong> legt fest, wieviele Iterationen bei der Verbesserung des Decision Trees durchlaufen werden sollen, <strong>model</strong> ob ein Decision Tree oder Rule Learning Algorithmus angewendet werden soll und <strong>winnow</strong> ob eine spezielle Anpassung vorgenommen werden soll, dessen Erklärung an dieser Stelle den Rahmen sprengen würde.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">selectionFunction =</span> <span class="st">&quot;best&quot;</span>, <span class="at">classProbs =</span> <span class="cn">TRUE</span>, <span class="at">summaryFunction =</span> twoClassSummary, <span class="at">savePredictions =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">model =</span> <span class="fu">c</span>(<span class="st">&quot;tree&quot;</span>),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">trials =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">winnow =</span> <span class="fu">c</span>(<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>m_c50 <span class="ot">&lt;-</span> <span class="fu">train</span>(preference <span class="sc">~</span> ., <span class="at">data =</span> spotify_df, <span class="at">method =</span> <span class="st">&quot;C5.0&quot;</span>, <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>, <span class="at">trControl =</span> ctrl, </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">tuneGrid =</span> grid)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>m_c50</span></code></pre></div>
+<pre><code>## C5.0 
+## 
+## 1537 samples
+##    9 predictor
+##    2 classes: &#39;negative&#39;, &#39;positive&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 1383, 1384, 1384, 1383, 1383, 1384, ... 
+## Resampling results across tuning parameters:
+## 
+##   winnow  trials  ROC        Sens   Spec     
+##   TRUE     1      0.8131410  0.618  0.8446882
+##   TRUE     5      0.8384581  0.618  0.8716860
+##   TRUE    10      0.8515806  0.626  0.8813200
+##   FALSE    1      0.8005594  0.618  0.8447069
+##   FALSE    5      0.8483463  0.668  0.8562640
+##   FALSE   10      0.8606180  0.662  0.8765030
+## 
+## Tuning parameter &#39;model&#39; was held constant at a value of tree
+## ROC was used to select the optimal model using the largest value.
+## The final values used for the model were trials = 10, model = tree and winnow
+##  = FALSE.</code></pre>
+<p>Der AUC Wert für unser neues Modell liegt deutlich über dem von unserer vorherigen Methode und kann bereits jetzt als gut beschrieben werden. Wie im Output zu sehen, wurde das beste Modell mit dem Parameter <strong>trials = 10</strong> ausgewählt. Da dies dem Maximum der von uns für diesen Parameter erprobten Werte entspricht, können wir versuchen das Modell weiter zu optimieren.</p>
+</div>
+<div id="optimierung-2" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Optimierung</h2>
+<p>Für die Optimierung unseres Decision Tree Modells können wir die zu testenden Werte für den Parameter <strong>trials</strong> in unserem tuneGrid erweitern.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">selectionFunction =</span> <span class="st">&quot;best&quot;</span>, <span class="at">classProbs =</span> <span class="cn">TRUE</span>, <span class="at">summaryFunction =</span> twoClassSummary, <span class="at">savePredictions =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">model =</span> <span class="fu">c</span>(<span class="st">&quot;tree&quot;</span>),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">trials =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>, <span class="dv">40</span>, <span class="dv">45</span>, <span class="dv">50</span>),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">winnow =</span> <span class="fu">c</span>(<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>m_c50_optimized <span class="ot">&lt;-</span> <span class="fu">train</span>(preference <span class="sc">~</span> ., <span class="at">data =</span> spotify_df, <span class="at">method =</span> <span class="st">&quot;C5.0&quot;</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">trControl =</span> ctrl,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">tuneGrid =</span> grid)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>m_c50_optimized</span></code></pre></div>
+<pre><code>## C5.0 
+## 
+## 1537 samples
+##    9 predictor
+##    2 classes: &#39;negative&#39;, &#39;positive&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 1384, 1384, 1383, 1383, 1383, 1383, ... 
+## Resampling results across tuning parameters:
+## 
+##   winnow  trials  ROC        Sens   Spec     
+##   TRUE     1      0.8054026  0.606  0.8679798
+##   TRUE     5      0.8426068  0.642  0.8707618
+##   TRUE    10      0.8512279  0.652  0.8650299
+##   TRUE    15      0.8533594  0.672  0.8544343
+##   TRUE    20      0.8527633  0.668  0.8553958
+##   TRUE    25      0.8529940  0.670  0.8525112
+##   TRUE    30      0.8529940  0.670  0.8525112
+##   TRUE    35      0.8529940  0.670  0.8525112
+##   TRUE    40      0.8529940  0.670  0.8525112
+##   TRUE    45      0.8529940  0.670  0.8525112
+##   TRUE    50      0.8529940  0.670  0.8525112
+##   FALSE    1      0.8189936  0.612  0.8639750
+##   FALSE    5      0.8440639  0.694  0.8360063
+##   FALSE   10      0.8551540  0.664  0.8668876
+##   FALSE   15      0.8604053  0.688  0.8620706
+##   FALSE   20      0.8630303  0.680  0.8668783
+##   FALSE   25      0.8628765  0.680  0.8659167
+##   FALSE   30      0.8635496  0.680  0.8649552
+##   FALSE   35      0.8635688  0.684  0.8659167
+##   FALSE   40      0.8635688  0.684  0.8659167
+##   FALSE   45      0.8635688  0.684  0.8659167
+##   FALSE   50      0.8635688  0.684  0.8659167
+## 
+## Tuning parameter &#39;model&#39; was held constant at a value of tree
+## ROC was used to select the optimal model using the largest value.
+## The final values used for the model were trials = 35, model = tree and winnow
+##  = FALSE.</code></pre>
+<p>Es zeigt sich, dass wir das Modell trotz einer bereits guten Leistung leicht verbessern konnten. Für eine finale Evaluierung und einen Vergleich mit der vorherigen Methode wenden wir die <em>roc()</em> Funktion aus dem <em>pROC</em> Package wieder mit den Vorhersagen unseres neuen Modells für den gesamten Datensatz an.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">pty =</span> <span class="st">&quot;s&quot;</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">roc</span>(m_knn_optimized<span class="sc">$</span>pred<span class="sc">$</span>obs, m_knn_optimized<span class="sc">$</span>pred<span class="sc">$</span>positive, <span class="at">plot=</span><span class="cn">TRUE</span>, <span class="at">legacy.axes=</span><span class="cn">TRUE</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">percent=</span><span class="cn">TRUE</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">xlab=</span><span class="st">&quot;False Positive Percentage&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;True Positive Percentage&quot;</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">col=</span><span class="st">&quot;aquamarine3&quot;</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">print.auc=</span><span class="cn">TRUE</span>, <span class="at">print.auc.y=</span><span class="dv">10</span>, <span class="at">print.auc.x=</span><span class="dv">30</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">main=</span><span class="st">&quot;Vergleich der ROC-Kurven von kNN und Decision Tree Modellen&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>roc_c50 <span class="ot">&lt;-</span> <span class="fu">plot.roc</span>(m_c50_optimized<span class="sc">$</span>pred<span class="sc">$</span>obs, m_c50_optimized<span class="sc">$</span>pred<span class="sc">$</span>positive, <span class="at">percent =</span> <span class="cn">TRUE</span>, <span class="at">col=</span><span class="st">&quot;chartreuse2&quot;</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">print.auc=</span><span class="cn">TRUE</span>, <span class="at">add=</span><span class="cn">TRUE</span>, <span class="at">print.auc.y=</span><span class="dv">20</span>, <span class="at">print.auc.x=</span><span class="dv">30</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">100</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;kNN&quot;</span>, <span class="st">&quot;Decision Tree&quot;</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;aquamarine3&quot;</span>, <span class="st">&quot;chartreuse2&quot;</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">xpd=</span><span class="cn">TRUE</span>, <span class="at">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="768" style="display: block; margin: auto;" />
+Der Unterschied zwischen den beiden bisher gewählten Methoden zeigt sich sehr deutlich. Die ROC Kurve und der entsprechende AUC Wert für die Fläche unter der Kurve zeigen, dass sich unser Decision Tree Modell deutlich besser für die Vorhersage der Songpräferenzen eignet, als unser kNN Modell.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>roc_c50<span class="sc">$</span>auc</span></code></pre></div>
+<pre><code>## Area under the curve: 85.18%</code></pre>
+
+</div>
+</div>
+<div id="neural-networks" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Neural Networks</h1>
+<div id="hintergrund-2" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Hintergrund</h2>
+<p>Ein künstliches neuronales Netzwerk (artificial neural network) modelliert die Verbindungen von Eingangssignalen, den Prädiktorvariablen, und einem Output, in unserem Fall die Klassifizierung, indem es Funktionen berechnet, die sich dem Datensatz anpassen. Um die Vorgänge in einem neuronalen Netzwerk besser zu verstehen, hilft es sich mit einem vereinfachten Schema auseinanderzusetzen.</p>
+<p>Im folgenden fiktiven Beispiel möchten wir die Songpräferenz (entweder positiv = 1 oder negativ = 0) für einen Song anhand seines Tempos (von sehr langsam über moderat bis sehr schnell) hervorsagen. Angenommen unsere Versuchsperson bevorzugt ausschließlich Songs mit moderatem Tempo, würde eine lineare Funktion diese Beziehung zwischen Tempo und Präferenz nicht abdecken können (siehe Abbildung unten, linke Seite).</p>
+<p>Um die in orange dargestellte optimale Funktion zur Vorhersage der Songpräferenz durch das Songtempo zu erhalten, müssen verschiedene Funktionen erstellt und dann summiert werden.</p>
+<p>Dies geschieht in einem neuronalen Netzwerk, indem unsere Werte x der Prädiktorvariable (Tempo) gewichtet und mit einem Bias angepasst werden, um spezielle Aktivierungsfunktionen auszulösen. Diese erzeugen dann Funktionen, dessen Werte ebenfalls gewichtet und anschließend summiert werden, um eine neue Funktion zu bilden, die unseren Daten der Songs und den Präferenzen entsprechen.</p>
+<p>Die Aktivierungsfunktionen dienen also letztlich dazu, aus den Werten x unserer Prädiktorvariable die y-Werte unserer optimalen Funktion zur Vorhersage zu generieren.</p>
+<br>
+<center>
+<img src="neuralnetwork1.png" title="fig:" alt="Neural Network Beispiel 1" />
+</center>
+<p><br></p>
+<p>Die Knotenpunkte der Aktivierungsfunktionen befinden sich in sogenannten verborgenen Schichten (hidden layers). Wieviele dieser Knotenpunkte und Schichten innerhalb eines neuronalen Netzwerks angewendet werden sollen, kann von uns selbst bestimmt werden und starken Einfluss auf die Qualität des Modells nehmen.</p>
+<p>Da unser fiktives Beispiel sehr stark vereinfacht wurde und wir in diesem Projekt mehr als nur das Tempo als Prädiktor für die Songspräferenz verwenden, sollte berücksichtigt werden, dass die realen Beziehungen zwischen den Variablen und damit auch die optimalen Funktionen zur Vorhersage deutlich komplexer sind. Gehen wir davon aus, dass neben dem Tempo noch viele weitere Variablen für die Präferenz entscheidend sind, kann es sein, dass die Beziehung zwischen Tempo und Präferenz und das Schema des neuronalen Netzwerkes beispielsweise eher der folgenden Abbildung entspricht.</p>
+<br>
+<center>
+<img src="neuralnetwork2.png" title="fig:" alt="Neural Network Beispiel 2" />
+</center>
+<p><br></p>
+<p>In der Veranschaulichung der optimalen Funktion zur Vorhersage wird außerdem deutlich, dass die Methode der neuronalen Netze unter Umständen zu einer Überanpassung an die Trainingsdaten führen kann. Im Falle einer Überanpassung würde das Modell bei neuen, zukünftigen Daten deutlich schlechtere Ergebnisse erzielen, als mit den zuvor verwendeten. Dennoch erweisen sich neuronale Netze in vielen komplexen Anwendungsfällen als äußerst nützlich, auch wenn sie sich im Vergleich zu anderen Methoden deutlich schwieriger erklären und interpretieren lassen.</p>
+<p>Das <em>caret</em> Package ermöglich die Nutzung verschiedener Algorithmen für neuronale Netze. Wir werden im Folgenden die Methode <strong>“nnet”</strong> verwenden, die über modelLookup() eingesehen werden kann.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelLookup</span>(<span class="st">&quot;nnet&quot;</span>)</span></code></pre></div>
+<pre><code>##   model parameter         label forReg forClass probModel
+## 1  nnet      size #Hidden Units   TRUE     TRUE      TRUE
+## 2  nnet     decay  Weight Decay   TRUE     TRUE      TRUE</code></pre>
+</div>
+<div id="modellerstellung-2" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Modellerstellung</h2>
+<p>Erneut erstellen wir ein erstes Modell über die <em>train()</em> Funktion unter Berücksichtigung unseres Testverfahrens.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">selectionFunction =</span> <span class="st">&quot;best&quot;</span>, <span class="at">classProbs =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">summaryFunction =</span> twoClassSummary, <span class="at">savePredictions =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>m_nnet <span class="ot">&lt;-</span> <span class="fu">train</span>(preference <span class="sc">~</span> ., <span class="at">data =</span> spotify_df, <span class="at">method =</span> <span class="st">&quot;nnet&quot;</span>, <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>, <span class="at">trControl =</span> ctrl)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>m_nnet</span></code></pre></div>
+<pre><code>## Neural Network 
+## 
+## 1537 samples
+##    9 predictor
+##    2 classes: &#39;negative&#39;, &#39;positive&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 1383, 1384, 1383, 1383, 1384, 1383, ... 
+## Resampling results across tuning parameters:
+## 
+##   size  decay  ROC        Sens   Spec     
+##   1     0e+00  0.6687145  0.272  0.9354649
+##   1     1e-04  0.6742792  0.328  0.9268577
+##   1     1e-01  0.8547311  0.644  0.8554518
+##   3     0e+00  0.8085686  0.594  0.8603809
+##   3     1e-04  0.7136327  0.404  0.9133495
+##   3     1e-01  0.8550655  0.646  0.8612491
+##   5     0e+00  0.8497929  0.666  0.8563947
+##   5     1e-04  0.8174125  0.592  0.8709578
+##   5     1e-01  0.8540344  0.640  0.8535288
+## 
+## ROC was used to select the optimal model using the largest value.
+## The final values used for the model were size = 3 and decay = 0.1.</code></pre>
+<p>Bereits jetzt zeigen sich gute AUC Werte, die sich eventuell über das Testen verschiedener Werte für die Parameter <strong>size</strong> und <strong>decay</strong> verbessern lassen können.</p>
+</div>
+<div id="optimierung-3" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Optimierung</h2>
+<p>Zur Optimierung des Modells legen wir ein Raster mit weiteren Werten für <strong>size</strong> und <strong>decay</strong> an und binden unser grid-Objekt in die <em>train()</em> Funktion ein. Der Parameter <strong>size</strong> legt fest, wieviele verborgene Knoten verwendet werden sollen. Der Parameter <strong>decay</strong> bezieht sich auf eine Regularisierungstechnik der Gewichte, um Überanpassung zu vermeiden.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">selectionFunction =</span> <span class="st">&quot;best&quot;</span>, <span class="at">classProbs =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">summaryFunction =</span> twoClassSummary, <span class="at">savePredictions =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span>  <span class="fu">expand.grid</span>(<span class="at">size =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">1</span>),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">decay =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.5</span>, <span class="at">by =</span> <span class="fl">0.1</span>))</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>m_nnet_optimized <span class="ot">&lt;-</span> <span class="fu">train</span>(preference <span class="sc">~</span>., <span class="at">data =</span> spotify_df,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">&quot;nnet&quot;</span>,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>, <span class="at">trControl =</span> ctrl,</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">tuneGrid =</span> grid)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>m_nnet_optimized</span></code></pre></div>
+<pre><code>## Neural Network 
+## 
+## 1537 samples
+##    9 predictor
+##    2 classes: &#39;negative&#39;, &#39;positive&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 1384, 1383, 1384, 1383, 1383, 1383, ... 
+## Resampling results across tuning parameters:
+## 
+##   size  decay  ROC        Sens   Spec     
+##    1    0.1    0.8103559  0.568  0.8667382
+##    1    0.2    0.8082952  0.564  0.8657860
+##    1    0.3    0.8508714  0.638  0.8571415
+##    1    0.4    0.8091193  0.570  0.8735063
+##    1    0.5    0.8506955  0.636  0.8648525
+##    2    0.1    0.8545155  0.628  0.8600728
+##    2    0.2    0.8499841  0.624  0.8581124
+##    2    0.3    0.8532851  0.636  0.8609970
+##    2    0.4    0.8523839  0.634  0.8648525
+##    2    0.5    0.8520713  0.630  0.8648525
+##    3    0.1    0.8534737  0.644  0.8610437
+##    3    0.2    0.8544238  0.634  0.8619679
+##    3    0.3    0.8518002  0.634  0.8609970
+##    3    0.4    0.8535050  0.630  0.8648525
+##    3    0.5    0.8529744  0.628  0.8687080
+##    4    0.1    0.8538585  0.646  0.8658234
+##    4    0.2    0.8553256  0.634  0.8648525
+##    4    0.3    0.8540751  0.642  0.8629294
+##    4    0.4    0.8536415  0.628  0.8658140
+##    4    0.5    0.8527845  0.622  0.8725541
+##    5    0.1    0.8573415  0.648  0.8610063
+##    5    0.2    0.8561884  0.636  0.8581311
+##    5    0.3    0.8535015  0.626  0.8658047
+##    5    0.4    0.8536763  0.622  0.8687080
+##    5    0.5    0.8521514  0.622  0.8696789
+##    6    0.1    0.8559098  0.644  0.8668129
+##    6    0.2    0.8543747  0.638  0.8629388
+##    6    0.3    0.8520222  0.634  0.8590739
+##    6    0.4    0.8534630  0.628  0.8638910
+##    6    0.5    0.8522446  0.624  0.8725635
+##    7    0.1    0.8569305  0.632  0.8581217
+##    7    0.2    0.8557000  0.628  0.8677558
+##    7    0.3    0.8541729  0.626  0.8667849
+##    7    0.4    0.8536032  0.626  0.8648525
+##    7    0.5    0.8525551  0.624  0.8696789
+##    8    0.1    0.8559785  0.634  0.8610063
+##    8    0.2    0.8559419  0.640  0.8629574
+##    8    0.3    0.8552446  0.634  0.8658140
+##    8    0.4    0.8530381  0.628  0.8687080
+##    8    0.5    0.8519343  0.622  0.8696882
+##    9    0.1    0.8562676  0.634  0.8571975
+##    9    0.2    0.8576186  0.644  0.8610063
+##    9    0.3    0.8538379  0.624  0.8706684
+##    9    0.4    0.8541201  0.630  0.8706497
+##    9    0.5    0.8533062  0.624  0.8745052
+##   10    0.1    0.8566951  0.648  0.8532954
+##   10    0.2    0.8560261  0.636  0.8677651
+##   10    0.3    0.8536113  0.624  0.8658327
+##   10    0.4    0.8526313  0.626  0.8667756
+##   10    0.5    0.8539055  0.626  0.8706311
+## 
+## ROC was used to select the optimal model using the largest value.
+## The final values used for the model were size = 9 and decay = 0.2.</code></pre>
+<p>In diesem Fall zeigt sich kaum eine Verbesserung unseres Modells, welches jedoch zuvor schon ein gutes Ergebnis erzeugen konnte.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">pty =</span> <span class="st">&quot;s&quot;</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.roc</span>(roc_knn, <span class="at">legacy.axes=</span><span class="cn">TRUE</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">percent=</span><span class="cn">TRUE</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">xlab=</span><span class="st">&quot;False Positive Percentage&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;True Positive Percentage&quot;</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">col=</span><span class="st">&quot;aquamarine3&quot;</span>,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">print.auc=</span><span class="cn">TRUE</span>, <span class="at">print.auc.y=</span><span class="dv">10</span>, <span class="at">print.auc.x=</span><span class="dv">30</span>,</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">main=</span><span class="st">&quot;Vergleich der ROC-Kurven von kNN, Decision Tree und Neural Network&quot;</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.roc</span>(roc_c50, <span class="at">percent =</span> <span class="cn">TRUE</span>, <span class="at">col=</span><span class="st">&quot;chartreuse2&quot;</span>,</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">print.auc=</span><span class="cn">TRUE</span>, <span class="at">add=</span><span class="cn">TRUE</span>, <span class="at">print.auc.y=</span><span class="dv">20</span>, <span class="at">print.auc.x=</span><span class="dv">30</span>)</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>roc_nn <span class="ot">&lt;-</span> <span class="fu">plot.roc</span>(m_nnet_optimized<span class="sc">$</span>pred<span class="sc">$</span>obs, m_nnet_optimized<span class="sc">$</span>pred<span class="sc">$</span>positive, <span class="at">percent =</span> <span class="cn">TRUE</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">print.auc=</span><span class="cn">TRUE</span>, <span class="at">add=</span><span class="cn">TRUE</span>, <span class="at">print.auc.y=</span><span class="dv">30</span>, <span class="at">print.auc.x=</span><span class="dv">30</span>)</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">100</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;kNN&quot;</span>, <span class="st">&quot;Decision Tree&quot;</span>, <span class="st">&quot;Neural Network&quot;</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;aquamarine3&quot;</span>, <span class="st">&quot;chartreuse2&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">xpd=</span><span class="cn">TRUE</span>, <span class="at">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="768" style="display: block; margin: auto;" />
+Im Vergleich mit unserem Decision Tree Modell ist jedoch kein großer Unterschied vorhanden. Beide Modelle zeigen ähnliche AUC Werte, die deutlich über dem Wert des kNN Modells liegen. Zur weiteren Optimierung würde es sich empfehlen unterschiedliche Algorithmen neuronaler Netze und verschiedene Aktivierungsfunktionen zu testen.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>roc_nn<span class="sc">$</span>auc</span></code></pre></div>
+<pre><code>## Area under the curve: 85.26%</code></pre>
+
+</div>
+</div>
+<div id="random-forests-decision-tree-forests" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Random Forests / Decision Tree Forests</h1>
+<div id="hintergrund-3" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Hintergrund</h2>
+<p>Eine weiteres sehr weit verbreitete Machine Learning Methode ist das Random Forest oder auch Decision Tree Forest genannte Verfahren, welches aus einem Ensemble mehrerer Decision Trees besteht. Dabei werden verschiedene Decision Trees anhand von einer zufälligen Auswahl der Variablen generiert und das Prinzip des Baggings angewendet, bei dem eine Vielzahl von Modellen mit unterschiedlichen Trainingsdatensätzen erstellt wird und deren Vorhersagen anschließend in einer Abstimmung kombiniert werden.</p>
+<p>Die folgenden Abbildungen dienen als Veranschaulichung der Schritte, die bei der Generierung eines Random Forest Modells durchgeführt werden. In diesem Beispiel soll das Genre von Songs anhand von drei unabhängigen Variablen klassifiziert werden.
+Zunächst wird durch das sogenannte Bootstrapping ein Trainingsdatensatz anhand von zufällig gewählten Fällen erstellt, bei dem ein Fall aus dem originalen Datensatz sogar mehrfach in dem Trainingsdatensatz vorkommen kann.</p>
+<br>
+<center>
+<img src="randomforest1.png" title="fig:" alt="Random Forest Beispiel 1" />
+</center>
+<br>
+<br>
+<center>
+<em>Für mehr Hintergrundinformationen zu Bootstrapping empfiehlt sich: Efron, B. &amp; Tibshirani, R. J. (1993). An Introduction to the Bootstrap (Monographs on Statistics and Applied Probability). Springer Science+Business Media. <a href="http://www.ru.ac.bd/stat/wp-content/uploads/sites/25/2019/03/501_02_Efron_Introduction-to-the-Bootstrap.pdf">Link zur PDF</a></em>
+</center>
+<p><br></p>
+<p>Anschließend werden aus dem neuen Trainingsdatensatz zufällig mehrere Variablen gewählt. Die Variable, die sich dann am besten dazu eignet, die Daten aufzuteilen, wird als Root Node eines Decision Trees verwendet. Aus den übrigen Variablen werden für den nächsten Knoten im Decision Tree erneut Variablen per Zufall ausgewählt. Dieser Prozess wird solange wiederholt, bis der Decision Tree vollständig generiert wurde.</p>
+<p>Wurde der Decision Tree fertiggestellt, werden alle Schritte inklusive Bootstrapping wiederholt, um weitere Decision Trees zu erstellen.</p>
+<p>Soll dann ein neuer Fall klassifiziert werden, werden alle Decision Tree Modelle auf die Daten des Falls angewendet und die am häufigsten vorkommende Vorhersage für diesen Fall übernommen - es findet praktisch also eine Art Abstimmung aller Modelle zur Klassifizierung des Falls statt.</p>
+<p>Die Kombination aus Bootstrapping und der Verwendung mehrerer Modelle zur Vorhersage wird Bootstrap-Aggregation oder auch Bagging genannt.</p>
+<br>
+<center>
+<img src="randomforest2.png" title="fig:" alt="Random Forest Beispiel 2" />
+</center>
+<p><br></p>
+<p>Wie im modelLookup von <em>caret</em> zu sehen ist, eignen sich Random Forest Algorithmen sowohl für Regressions- als auch Klassifizierungsverfahren. Im Falle einer Regression würde zur Vorhersage eines neuen Falls der Durchschnitt der Vorhersagen aller Decision Trees verwendet werden. Der Parameter <em>mtry</em> gibt die Anzahl der zufällig ausgewählten Variablen bei der Erstellung neuer Knoten an.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelLookup</span>(<span class="st">&quot;rf&quot;</span>)</span></code></pre></div>
+<pre><code>##   model parameter                         label forReg forClass probModel
+## 1    rf      mtry #Randomly Selected Predictors   TRUE     TRUE      TRUE</code></pre>
+<br>
+<center>
+<em>Für mehr Hintergrundinformationen zur Random Forest Methode empfiehlt sich die folgende Literatur: Breiman, L. (2001). Random Forests. Machine Learning, 45(1), 5–32. <a href="https://doi.org/10.1023/a:1010933404324" class="uri">https://doi.org/10.1023/a:1010933404324</a> </em>
+</center>
+</div>
+<div id="modellerstellung-3" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Modellerstellung</h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">selectionFunction =</span> <span class="st">&quot;best&quot;</span>, <span class="at">classProbs =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">summaryFunction =</span> twoClassSummary, <span class="at">savePredictions =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>m_rf <span class="ot">&lt;-</span> <span class="fu">train</span>(preference <span class="sc">~</span>., <span class="at">data =</span> spotify_df, <span class="at">method =</span> <span class="st">&quot;rf&quot;</span>, <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>, <span class="at">trControl =</span> ctrl)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>m_rf</span></code></pre></div>
+<pre><code>## Random Forest 
+## 
+## 1537 samples
+##    9 predictor
+##    2 classes: &#39;negative&#39;, &#39;positive&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 1383, 1383, 1383, 1384, 1383, 1383, ... 
+## Resampling results across tuning parameters:
+## 
+##   mtry  ROC        Sens   Spec     
+##   2     0.8826965  0.652  0.8843540
+##   5     0.8770093  0.660  0.8717980
+##   9     0.8722044  0.668  0.8708458
+## 
+## ROC was used to select the optimal model using the largest value.
+## The final value used for the model was mtry = 2.</code></pre>
+<p>Unser erstes Random Forest Modell hat von allen bisherigen Methoden das beste Ergebnis erzielt.</p>
+</div>
+<div id="optimierung-4" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Optimierung</h2>
+<p>Um eine weitere Optimierung zu prüfen, bietet sich der Test verschiedener Werte für den Parameter <em>mtry</em>, also die Anzahl der Variablen, die bei der Erstellung von Knoten zufällig ausgewählt werden, an.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>,</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">number =</span> <span class="dv">10</span>,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">selectionFunction =</span> <span class="st">&quot;best&quot;</span>, <span class="at">classProbs =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">summaryFunction =</span> twoClassSummary,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">savePredictions =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">mtry =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span> , <span class="dv">16</span>))</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>m_rf_optimized <span class="ot">&lt;-</span> <span class="fu">train</span>(preference <span class="sc">~</span>., <span class="at">data =</span> spotify_df,</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">&quot;rf&quot;</span>,</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>, <span class="at">trControl =</span> ctrl,</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">tuneGrid =</span> grid)</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>m_rf_optimized</span></code></pre></div>
+<pre><code>## Random Forest 
+## 
+## 1537 samples
+##    9 predictor
+##    2 classes: &#39;negative&#39;, &#39;positive&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 1383, 1383, 1383, 1383, 1383, 1384, ... 
+## Resampling results across tuning parameters:
+## 
+##   mtry  ROC        Sens   Spec     
+##    1    0.8842617  0.650  0.8987771
+##    2    0.8837182  0.670  0.8862397
+##    4    0.8817194  0.676  0.8756441
+##    8    0.8749481  0.684  0.8602315
+##   16    0.8763132  0.690  0.8640777
+## 
+## ROC was used to select the optimal model using the largest value.
+## The final value used for the model was mtry = 1.</code></pre>
+<p>Wie in der Ausgabe zu sehen ist, ließ sich unser Modell kaum verbessern und erzielt mit einem geringeren Wert für den Parameter <em>mtry</em> eher die besseren Ergebnisse.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">pty =</span> <span class="st">&quot;s&quot;</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.roc</span>(roc_knn, <span class="at">legacy.axes=</span><span class="cn">TRUE</span>,</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">percent=</span><span class="cn">TRUE</span>,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">xlab=</span><span class="st">&quot;False Positive Percentage&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;True Positive Percentage&quot;</span>,</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">col=</span><span class="st">&quot;aquamarine3&quot;</span>,</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">print.auc=</span><span class="cn">TRUE</span>, <span class="at">print.auc.y=</span><span class="dv">10</span>, <span class="at">print.auc.x=</span><span class="dv">30</span>,</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">main=</span><span class="st">&quot;Vergleich der ROC-Kurven von kNN, Decision Tree, Neural Network und Random Forest&quot;</span>, <span class="at">cex.main=</span><span class="fl">0.9</span>)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.roc</span>(roc_c50, <span class="at">percent =</span> <span class="cn">TRUE</span>, <span class="at">col=</span><span class="st">&quot;chartreuse2&quot;</span>,</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">print.auc=</span><span class="cn">TRUE</span>, <span class="at">add=</span><span class="cn">TRUE</span>, <span class="at">print.auc.y=</span><span class="dv">20</span>, <span class="at">print.auc.x=</span><span class="dv">30</span>)</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.roc</span>(roc_nn, <span class="at">percent =</span> <span class="cn">TRUE</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">print.auc=</span><span class="cn">TRUE</span>, <span class="at">add=</span><span class="cn">TRUE</span>, <span class="at">print.auc.y=</span><span class="dv">30</span>, <span class="at">print.auc.x=</span><span class="dv">30</span>)</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>roc_rf <span class="ot">&lt;-</span> <span class="fu">plot.roc</span>(m_rf_optimized<span class="sc">$</span>pred<span class="sc">$</span>obs, m_rf_optimized<span class="sc">$</span>pred<span class="sc">$</span>positive, <span class="at">percent =</span> <span class="cn">TRUE</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>,</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">print.auc=</span><span class="cn">TRUE</span>, <span class="at">add=</span><span class="cn">TRUE</span>, <span class="at">print.auc.y=</span><span class="dv">40</span>, <span class="at">print.auc.x=</span><span class="dv">30</span>)</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">100</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;kNN&quot;</span>, <span class="st">&quot;Decision Tree&quot;</span>, <span class="st">&quot;Neural Network&quot;</span>, <span class="st">&quot;Random Forest&quot;</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;aquamarine3&quot;</span>, <span class="st">&quot;chartreuse2&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">xpd=</span><span class="cn">TRUE</span>, <span class="at">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-27-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Verglichen mit allen bisher verwendeten Methoden hat unser Random Forest Modell das beste Ergebnis erzielt. Zwar ist im Vergleich zu unseren Decision Tree und Neural Network Modellen nur eine leichte Verbesserung zu erkennen, je nach präferierter Relation von True Positive und False Positive Rate, kann die Auswahl der entsprechenden Methode jedoch einen großen Unterschied machen.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>roc_rf<span class="sc">$</span>auc</span></code></pre></div>
+<pre><code>## Area under the curve: 87.73%</code></pre>
+
+</div>
+</div>
+<div id="fazit" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Fazit</h1>
+<p>Dieses Projekt hat erste Ansätze gezeigt, um mit gängigen Machine Learning Methoden Songpräferenzen basierend auf den Spotify Audio-Analysen hervorzusagen. Während das auf der k-Nearest Neighbors Methode beruhende Modell nur ein sehr schwaches Ergebnis im Hinblick auf den von uns gewählten Kennwert zur Bewertung der Modellqualität erreichen konnte, erzielten die drei weiteren Methoden Ergebnisse, die als gut beschrieben werden können.</p>
+<p>Da in diesem Projekt jedoch nur ein einziger Datensatz zur Erprobung der Methoden verwendet wurde, der dazu noch von mir selbst erstellt worden ist, sind weitere Untersuchungen mit einem fundierten Forschungsdesign nötig, um Aussagen über die Eignung der Methoden zur Vorhersage der Songpräferenzen zu treffen. Des Weiteren lassen sich in allen der erprobten Methoden weitere Ausführungen und Parameter der jeweiligen Algorithmen untersuchen, da nur ein äußerst kleiner Teil der zur Verfügung stehenden R Packages für Machine Learning Algorithmen verwendet wurde.</p>
+
+</div>
+<div id="weiterführende-informationen" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Weiterführende Informationen</h1>
+<p>Dokumentationen der verwendeten Libraries:</p>
+<ul>
+<li><a href="https://www.rdocumentation.org/packages/spotifyr/versions/2.2.3">spotifyr</a></li>
+<li><a href="https://topepo.github.io/caret/">caret</a><br />
+</li>
+<li><a href="https://www.rdocumentation.org/packages/pROC/versions/1.18.0">pROC</a></li>
+</ul>
+<p>Hintergrundinformationen &amp; Erklärungen:</p>
+<ul>
+<li><a href="https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features">Spotify API Dokumentation - Genauere Erklärung der Audio Features</a><br />
+</li>
+<li><a href="https://youtu.be/4jRBRDbJemM">StatQuest: ROC and AUC, Clearly Explained! (video)</a></li>
+<li><a href="https://youtu.be/7VeUPuFGJHk">StatQuest: Decision Trees (video)</a><br />
+</li>
+<li><a href="https://youtu.be/CqOfi41LfDw">StatQuest: Neural Networks Pt. 1: Inside the Black Box (video)</a></li>
+</ul>
+<p>Empfehlenswerte Bücher für den Einstieg:</p>
+<ul>
+<li><a href="https://www.amazon.de/Machine-Learning-techniques-predictive-modeling/dp/1788295862/ref=sr_1_1?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&amp;crid=1041FI12WHFW6&amp;keywords=packt+machine+learning+with+r&amp;qid=1641058746&amp;sprefix=packt+machine+learning+with+r%2Caps%2C91&amp;sr=8-1">Machine Learning with R: Expert techniques for predictive modeling, 3rd Edition</a></li>
+<li><a href="https://www.amazon.de/Practical-Machine-Learning-Fred-Nwanganga/dp/1119591511/ref=sr_1_2?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&amp;crid=3DVOBO4ZX6T93&amp;keywords=practical+machine+learning+in+r&amp;qid=1641120544&amp;sprefix=practical+machine+learning+in+r%2Caps%2C81&amp;sr=8-2">Practical Machine Learning in R</a></li>
+</ul>
+<p>Literatur für den theoretischen Hintergrund:</p>
+<ul>
+<li><p>Breiman, L. (2001). Random Forests. <em>Machine Learning</em>, <em>45</em>(1), 5–32. <a href="https://doi.org/10.1023/a:1010933404324" class="uri">https://doi.org/10.1023/a:1010933404324</a></p></li>
+<li><p>Breiman, L., Friedman, J. H., Olshen, R. A. &amp; Stone, C. J. (1984). <em>Classification and Regression Trees</em>. Chapman &amp; Hall.</p></li>
+<li><p>Efron, B. &amp; Tibshirani, R. J. (1993). <em>An Introduction to the Bootstrap (Monographs on Statistics and Applied Probability)</em>. Springer Science+Business Media. <a href="http://www.ru.ac.bd/stat/wp-content/uploads/sites/25/2019/03/501_02_Efron_Introduction-to-the-Bootstrap.pdf">Link zur PDF</a></p></li>
+<li><p>Jena, M. &amp; Dehuri, S. (2020). DecisionTree for Classiﬁcation and Regression: A State-of-the Art Review. <em>Informatica</em>, <em>44</em>(4). <a href="https://doi.org/10.31449/inf.v44i4.3023" class="uri">https://doi.org/10.31449/inf.v44i4.3023</a></p></li>
+<li><p>Kohavi, R. (1995). A Study of Cross-Validation and Bootstrap for Accuracy Estimation and Model Selection. International Joint Conference on Artificial Intelligence. <a href="http://ai.stanford.edu/~ronnyk/accEst.pdf">Link zur PDF</a></p></li>
+<li><p>Robin, X., Turck, N., Hainard, A., Tiberti, N., Lisacek, F., Sanchez, J. C. &amp; Müller, M. (2011). pROC: an open-source package for R and S+ to analyze and compare ROC curves. <em>BMC Bioinformatics</em>, <em>12</em>(1). <a href="https://doi.org/10.1186/1471-2105-12-77" class="uri">https://doi.org/10.1186/1471-2105-12-77</a></p></li>
+</ul>
+<p><br>
+Autor: Jonathan Schuster<br />
+Kontakt: <a href="mailto:schuster.jonathan95@gmail.com" class="email">schuster.jonathan95@gmail.com</a><br />
+Github: <a href="https://github.com/schuster-j" class="uri">https://github.com/schuster-j</a></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toc_float": {
+"collapsed": false
+},
+"toc_depth": 3
+});
+});
+</script>
+
+</body>
+
+</html>
